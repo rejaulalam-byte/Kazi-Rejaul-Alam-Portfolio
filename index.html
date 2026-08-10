@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kazi Rejaul Alam — Deputy Director, ICT</title>
+<meta name="description" content="Portfolio of Kazi Rejaul Alam, Deputy Director — ICT at RTM International. 33+ years in network infrastructure, systems administration and digital security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D12;
+    --bg-elev:#12161D;
+    --bg-elev-2:#171C25;
+    --line:#232A35;
+    --line-soft:#1A2029;
+    --text:#EDEFF2;
+    --text-dim:#9098A8;
+    --text-faint:#5A6270;
+    --accent:#FF7A29;
+    --accent-soft:#FFA35C;
+    --accent-dim:rgba(255,122,41,0.12);
+    --accent-line:rgba(255,122,41,0.35);
+    --ok:#3DDC84;
+    --radius:10px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#0A0D12;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+
+  /* background grid texture */
+  .grid-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 70%);
+    opacity:0.5;
+  }
+
+  /* nav */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,13,18,0.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .nav-brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;font-weight:500;letter-spacing:0.02em;
+  }
+  .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);
+    box-shadow:0 0 0 3px rgba(61,220,132,0.15);
+    animation:pulse-dot 2.4s ease-in-out infinite;}
+  @keyframes pulse-dot{
+    0%,100%{box-shadow:0 0 0 3px rgba(61,220,132,0.15);}
+    50%{box-shadow:0 0 0 6px rgba(61,220,132,0.08);}
+  }
+  .nav-links{display:flex;gap:34px;font-size:14px;color:var(--text-dim);}
+  .nav-links a{transition:color 0.2s;position:relative;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    border:1px solid var(--line);padding:9px 16px;border-radius:6px;
+    color:var(--text);transition:border-color 0.2s, background 0.2s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{border-color:var(--accent);background:var(--accent-dim);}
+  .nav-toggle{display:none;}
+
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;background:none;border:1px solid var(--line);color:var(--text);
+      width:38px;height:38px;border-radius:6px;font-size:18px;cursor:pointer;}
+  }
+
+  /* hero */
+  .hero{padding:96px 32px 60px;position:relative;z-index:1;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:0.08em;
+    color:var(--accent-soft);margin-bottom:22px;
+  }
+  .eyebrow-bar{width:28px;height:1px;background:var(--accent);}
+  .hero-title{
+    font-size:clamp(42px,6vw,68px);line-height:1.04;font-weight:600;
+    letter-spacing:-0.02em;margin-bottom:22px;
+  }
+  .hero-sub{font-size:18px;color:var(--text-dim);max-width:480px;margin-bottom:32px;}
+
+  .terminal{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;margin-bottom:34px;max-width:480px;
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:7px;padding:10px 14px;
+    background:var(--bg-elev-2);border-bottom:1px solid var(--line);
+  }
+  .terminal-bar span:not(.terminal-title){width:9px;height:9px;border-radius:50%;background:#333c48;}
+  .terminal-title{margin-left:8px;font-size:11.5px;color:var(--text-faint);}
+  .terminal-body{padding:16px 18px;font-size:13px;min-height:118px;color:var(--text-dim);}
+  .terminal-body .ln{margin-bottom:6px;white-space:pre-wrap;}
+  .terminal-body .ok{color:var(--ok);}
+  .terminal-body .pr{color:var(--accent-soft);}
+  .terminal-cursor{display:inline-block;width:7px;height:14px;background:var(--accent-soft);vertical-align:middle;animation:blink 1s step-start infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:7px;font-size:14.5px;font-weight:500;
+    transition:all 0.2s;
+  }
+  .btn-primary{background:var(--accent);color:#180C04;}
+  .btn-primary:hover{background:var(--accent-soft);transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent-line);background:var(--accent-dim);}
+  .btn .arrow{transition:transform 0.2s;}
+  .btn-ghost:hover .arrow{transform:translateX(3px);}
+
+  .netmap-card{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 8px;
+  }
+  .netmap-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11.5px;color:var(--text-faint);letter-spacing:0.06em;margin-bottom:8px;
+  }
+  .netmap-live{display:flex;align-items:center;gap:6px;color:var(--ok);}
+  .live-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse-dot 2s ease-in-out infinite;}
+  .netmap-foot{
+    display:flex;justify-content:space-around;border-top:1px solid var(--line);
+    padding:14px 0;margin-top:4px;
+  }
+  .netmap-foot div{display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .netmap-num{font-size:19px;font-weight:600;color:var(--text);}
+  .netmap-label{font-size:11px;color:var(--text-faint);letter-spacing:0.04em;}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .hero-copy .reveal:nth-child(1){transition-delay:0.05s;}
+  .hero-copy .reveal:nth-child(2){transition-delay:0.15s;}
+  .hero-copy .reveal:nth-child(3){transition-delay:0.25s;}
+  .hero-copy .reveal:nth-child(4){transition-delay:0.35s;}
+  .hero-copy .reveal:nth-child(5){transition-delay:0.45s;}
+
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 20px 40px;}
+    .hero-visual{order:-1;margin-bottom:8px;}
+  }
+
+  /* section headers, generic */
+  .section-head{margin-bottom:44px;}
+  .section-tag{
+    display:block;font-size:12.5px;color:var(--accent-soft);letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .section-title{font-size:clamp(26px,3.4vw,36px);font-weight:600;letter-spacing:-0.01em;}
+
+  section.wrap{padding:84px 32px;position:relative;z-index:1;}
+  @media(max-width:860px){section.wrap{padding:56px 20px;}}
+
+  /* stats */
+  .stats{padding-top:0 !important;padding-bottom:0 !important;}
+  .stats-row{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .stat{padding:34px 20px;text-align:center;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;}
+  .stat-num{font-size:clamp(28px,3.4vw,38px);font-weight:600;color:var(--accent-soft);margin-bottom:6px;}
+  .stat-label{font-size:13px;color:var(--text-faint);letter-spacing:0.02em;}
+  @media(max-width:700px){
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;}
+  }
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:start;}
+  .about-photo{position:relative;width:220px;}
+  .about-photo img{
+    width:220px;height:220px;object-fit:cover;border-radius:12px;
+    filter:grayscale(15%) contrast(1.05);position:relative;z-index:1;
+  }
+  .photo-frame{
+    position:absolute;top:14px;left:14px;width:220px;height:220px;
+    border:1px solid var(--accent-line);border-radius:12px;z-index:0;
+  }
+  .about-copy p{color:var(--text-dim);font-size:15.5px;margin-bottom:16px;max-width:640px;}
+  .about-meta{display:flex;gap:44px;margin-top:26px;flex-wrap:wrap;}
+  .about-meta > div{display:flex;flex-direction:column;gap:5px;}
+  .meta-k{font-size:11px;color:var(--text-faint);letter-spacing:0.06em;}
+  .meta-v{font-size:13.5px;color:var(--accent-soft);}
+  @media(max-width:700px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{margin:0 auto;}
+  }
+
+  /* expertise */
+  .expertise-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  }
+  .exp-card{background:var(--bg-elev);padding:28px 26px;transition:background 0.2s;}
+  .exp-card:hover{background:var(--bg-elev-2);}
+  .exp-icon{color:var(--accent);font-size:13px;margin-bottom:14px;}
+  .exp-card h3{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em;}
+  .exp-card p{font-size:13.5px;color:var(--text-faint);line-height:1.55;}
+  @media(max-width:860px){.expertise-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.expertise-grid{grid-template-columns:1fr;}}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(var(--accent-line),var(--line) 85%);
+  }
+  .tl-item{position:relative;padding-bottom:46px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--accent);
+  }
+  .tl-earlier .tl-dot{border-color:var(--text-faint);}
+  .tl-date{font-size:12.5px;color:var(--accent-soft);margin-bottom:8px;letter-spacing:0.03em;}
+  .tl-body h3{font-size:19px;font-weight:600;margin-bottom:5px;letter-spacing:-0.01em;}
+  .tl-org{font-size:13.5px;color:var(--text-faint);margin-bottom:14px;}
+  .tl-body ul{padding-left:18px;}
+  .tl-body li{font-size:14.5px;color:var(--text-dim);margin-bottom:7px;}
+  .tl-body li strong{color:var(--text);font-weight:500;}
+
+  /* education */
+  .cert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:56px;}
+  .cert-card{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:10px;
+    padding:22px 16px;text-align:center;transition:border-color 0.2s;
+  }
+  .cert-card:hover{border-color:var(--accent-line);}
+  .cert-code{font-size:20px;font-weight:600;color:var(--accent-soft);margin-bottom:8px;}
+  .cert-name{font-size:12px;color:var(--text-faint);line-height:1.4;}
+  @media(max-width:700px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .training-title{font-size:16px;font-weight:600;margin-bottom:18px;color:var(--text);}
+  .training-list{list-style:none;}
+  .training-list li{
+    font-size:13.5px;color:var(--text-dim);padding:12px 0;
+    border-top:1px solid var(--line-soft);display:flex;gap:14px;align-items:baseline;
+  }
+  .training-list li:last-child{border-bottom:1px solid var(--line-soft);}
+  .tl-tag{
+    flex:0 0 42px;font-size:11px;color:var(--accent-soft);
+    background:var(--accent-dim);padding:3px 6px;border-radius:4px;text-align:center;
+  }
+
+  /* contact */
+  .contact-card{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:16px;
+    padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  }
+  .contact-copy{color:var(--text-dim);font-size:15px;margin-top:16px;max-width:380px;}
+  .contact-right{display:flex;flex-direction:column;gap:0;}
+  .contact-row{
+    display:flex;flex-direction:column;gap:4px;padding:16px 0;
+    border-bottom:1px solid var(--line-soft);transition:padding-left 0.2s;
+  }
+  a.contact-row:hover{padding-left:6px;}
+  .contact-k{font-size:11px;color:var(--text-faint);letter-spacing:0.08em;}
+  .contact-v{font-size:15px;color:var(--text);}
+  a.contact-row .contact-v{color:var(--accent-soft);}
+  @media(max-width:800px){.contact-card{grid-template-columns:1fr;padding:32px;}}
+
+  /* footer */
+  .footer{border-top:1px solid var(--line);padding:28px 32px;position:relative;z-index:1;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--text-faint);}
+  .footer-status{display:flex;align-items:center;gap:8px;}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="nav-brand"><span class="nav-dot"></span> KAZI&nbsp;REJAUL&nbsp;ALAM</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">// get in touch</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow reveal"><span class="eyebrow-bar"></span>DEPUTY DIRECTOR — ICT · RTM INTERNATIONAL</div>
+      <h1 class="hero-title reveal">Kazi Rejaul<br>Alam</h1>
+      <p class="hero-sub reveal">Thirty-three years keeping networks, systems and people connected — across four sites, five engineers and 500+ devices.</p>
+
+      <div class="terminal reveal">
+        <div class="terminal-bar"><span></span><span></span><span></span><span class="terminal-title mono">status.log</span></div>
+        <div class="terminal-body mono" id="terminal-body"></div>
+      </div>
+
+      <div class="hero-cta reveal">
+        <a href="#experience" class="btn btn-primary">View experience</a>
+        <a href="mailto:rejaulalam@gmail.com" class="btn btn-ghost">Email me <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="netmap-card">
+        <div class="netmap-head mono">
+          <span>NETWORK_OPS.MAP</span>
+          <span class="netmap-live"><span class="live-dot"></span>LIVE</span>
+        </div>
+        <svg id="netmap" viewBox="0 0 480 460" width="100%" height="auto" role="img" aria-label="Diagram of ICT sites managed across RTM International, connected to Head Office">
+          <defs>
+            <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="3" fill="var(--accent)"/></marker>
+          </defs>
+          <g id="netmap-lines" stroke="#2A3242" stroke-width="1.4" fill="none"></g>
+          <g id="netmap-pulses"></g>
+          <g id="netmap-nodes"></g>
+        </svg>
+        <div class="netmap-foot mono">
+          <div><span class="netmap-num">500+</span><span class="netmap-label">devices</span></div>
+          <div><span class="netmap-num">4</span><span class="netmap-label">sites</span></div>
+          <div><span class="netmap-num">5</span><span class="netmap-label">engineers</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="stats wrap">
+  <div class="stats-row">
+    <div class="stat reveal">
+      <div class="stat-num mono" data-count="33" data-suffix="+">33+</div>
+      <div class="stat-label">Years of experience</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num mono" data-count="5" data-suffix="">5</div>
+      <div class="stat-label">IT team members</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num mono" data-count="500" data-suffix="+">500+</div>
+      <div class="stat-label">Devices supported</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num mono">Multi-site</div>
+      <div class="stat-label">ICT operations</div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about wrap">
+  <div class="section-head reveal">
+    <span class="section-tag mono">01 · about</span>
+    <h2 class="section-title display">Professional profile</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <img src="assets/profile.jpg" alt="Portrait of Kazi Rejaul Alam">
+      <div class="photo-frame"></div>
+    </div>
+    <div class="about-copy reveal">
+      <p>Senior ICT professional with more than 33 years of experience in office and program management, MIS, ICT operations, network infrastructure, security, and computer/network troubleshooting.</p>
+      <p>Currently serving as Deputy Director — ICT at RTM International, with responsibility for the organization's overall network and ICT systems across the head office, branch/field offices, RTMI-HRDC and RTM Al-Kabir Technical University (RTM-AKTU).</p>
+      <p>Experienced in ICT planning, communication systems, digital security, team supervision, technical support, and technology-related administrative planning.</p>
+      <div class="about-meta mono">
+        <div><span class="meta-k">Location</span><span class="meta-v">Dhaka, Bangladesh</span></div>
+        <div><span class="meta-k">Languages</span><span class="meta-v">Bangla (native), English (good)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="expertise" class="expertise wrap">
+  <div class="section-head reveal">
+    <span class="section-tag mono">02 · expertise</span>
+    <h2 class="section-title display">Where I add the most value</h2>
+  </div>
+  <div class="expertise-grid">
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>IT / ICT management</h3>
+      <p>Planning and running ICT operations across multi-site organizations.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>Network design &amp; administration</h3>
+      <p>LAN architecture, servers, and infrastructure across head office and field sites.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>Hardware &amp; software troubleshooting</h3>
+      <p>Keeping 500+ desktops, laptops and peripherals running reliably.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>Server &amp; user account administration</h3>
+      <p>Provisioning, maintaining and securing user and server accounts.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>MIS &amp; management reporting</h3>
+      <p>Building and maintaining management information systems and reports.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>Email &amp; internet services</h3>
+      <p>Organization-wide email systems, connectivity and communication tools.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>IT procurement &amp; technical support</h3>
+      <p>Sourcing network hardware and supporting staff across every site.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>Digital security / CCTV systems</h3>
+      <p>Overseeing surveillance and digital-security infrastructure.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-icon">◆</div>
+      <h3>WordPress web design / UI-UX</h3>
+      <p>Designing and shipping websites, including AI-assisted workflows.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="experience wrap">
+  <div class="section-head reveal">
+    <span class="section-tag mono">03 · experience</span>
+    <h2 class="section-title display">Working experience</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-date mono">2025 — Present</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>Deputy Director — ICT</h3>
+        <div class="tl-org">Research, Training and Management International (RTM International), RTM Complex, Dhaka</div>
+        <ul>
+          <li>Fully responsible for RTM International's total network system.</li>
+          <li>Supervises and coordinates five IT team members.</li>
+          <li>Oversees ICT services for the head office, Cox's Bazar field office, Sylhet Branch / RTMI-HRDC and RTM Al-Kabir Technical University (RTM-AKTU), both 10-storey buildings.</li>
+          <li>Supports an environment of more than 500 desktop and laptop computers and related equipment.</li>
+          <li>Plans the organization's total communication system, including email and telecommunications.</li>
+          <li>Oversees digital security systems, including CCTV and related technology.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date mono">2017 — 2024</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>IT Officer</h3>
+        <div class="tl-org">RTM International, RTM Complex, Dhaka</div>
+        <ul>
+          <li>Responsible for LAN design and maintenance at RTM Head Quarter, supporting 250+ computers across divisions.</li>
+          <li>Provided hardware and software troubleshooting and solutions.</li>
+          <li>Maintained network servers, user accounts and network tools.</li>
+          <li>Supported procurement of network-related accessories.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date mono">2014 — 2017</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>MIS Officer</h3>
+        <div class="tl-org">RTM International — Long-Acting Reversible Contraceptive and Permanent Method Services Project, with EngenderHealth Bangladesh, funded by USAID</div>
+        <ul>
+          <li>Coordinated with seven Mobile Service Delivery Care Teams for project MIS across divisions.</li>
+          <li>Monitored operations and collected service data from surgeons and paramedics.</li>
+          <li>Prepared monthly and quarterly reports for EngenderHealth.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date mono">2002 — 2014</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>IT Officer</h3>
+        <div class="tl-org">RTM International / JSI Bangladesh, Dhaka</div>
+        <ul>
+          <li>Responsible for LAN design and maintenance for a 5-storey headquarters and district project computers.</li>
+          <li>Implemented MIS and supported development of program-related software.</li>
+          <li>Prepared and compiled MIS performance reports, and monitored nationwide surveys.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date mono">2000 — 2002</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>System Associate</h3>
+        <div class="tl-org">Urban Family Health Partnership (UFHP) / JSI, Dhaka</div>
+        <ul>
+          <li>Designed, operated and maintained LAN at UFHP headquarters.</li>
+          <li>Specified hardware, software and communication standards for NGO systems.</li>
+          <li>Maintained project NGO MIS monthly reports.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item tl-earlier reveal">
+      <div class="tl-date mono">1990 — 2000</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h3>Earlier roles</h3>
+        <ul>
+          <li><strong>Personal Officer &amp; Computer in Charge</strong>, Creative Engineers Ltd. (1997–2000) — office computers, LAN systems and graphic design work.</li>
+          <li><strong>Computer Operator</strong>, Development Planners &amp; Consultants (1993–1997) — reports and graphical work for World Bank–funded education projects.</li>
+          <li><strong>Photographic Technical Trainer</strong>, INFOSYS Group (1995) — trained photographers under the Election Commission's Voter I.D. Card Project.</li>
+          <li><strong>Data Entry / Computer Operator</strong>, BRAC &amp; BCAS (1990–1991) — data entry, checking and official documentation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="education" class="education wrap">
+  <div class="section-head reveal">
+    <span class="section-tag mono">04 · education</span>
+    <h2 class="section-title display">Education &amp; certifications</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card reveal"><div class="cert-code mono">B.A.</div><div class="cert-name">University of Dhaka</div></div>
+    <div class="cert-card reveal"><div class="cert-code mono">MCP</div><div class="cert-name">Microsoft Corporation</div></div>
+    <div class="cert-card reveal"><div class="cert-code mono">CCNA</div><div class="cert-name">Cisco Systems, Inc.</div></div>
+    <div class="cert-card reveal"><div class="cert-code mono">RHCSE</div><div class="cert-name">Red Hat, Inc.</div></div>
+    <div class="cert-card reveal"><div class="cert-code mono">RHCSA</div><div class="cert-name">Red Hat, Inc.</div></div>
+  </div>
+
+  <div class="training reveal">
+    <h3 class="training-title">Technical training</h3>
+    <ul class="training-list mono">
+      <li><span class="tl-tag">6 mo</span> Microsoft Certified Solutions Associate (MCSA) 2012 Server — CLS Training Institute, Dhaka</li>
+      <li><span class="tl-tag">7 mo</span> Cisco Certified Network Associate (CCNA) — Linux Pathshala, Mohammadpur, Dhaka</li>
+      <li><span class="tl-tag">6 mo</span> Red Hat Linux (DNS, Gateway, FTP, HTTP, NFS, Samba, server setup) — Linux Pathshala, Dhaka</li>
+      <li><span class="tl-tag">1 yr</span> Computer Networking / MCSE — IBM-ACE Advanced Career Education, Dhaka</li>
+      <li><span class="tl-tag">2 mo</span> Computer Network System (NT Environment) — hitech professionals, Dhaka (1999)</li>
+      <li><span class="tl-tag">4 mo</span> Computer Hardware — Computer &amp; Electronic, Dhaka (1998)</li>
+      <li><span class="tl-tag">—</span> Apple Computer training — Bangla Academy Computer Training Centre (1992)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" class="contact wrap">
+  <div class="contact-card">
+    <div class="contact-left reveal">
+      <span class="section-tag mono">05 · contact</span>
+      <h2 class="section-title display">Let's connect</h2>
+      <p class="contact-copy">Open to conversations on ICT operations, network infrastructure and digital security. Reach out directly.</p>
+    </div>
+    <div class="contact-right reveal">
+      <a class="contact-row" href="mailto:rejaulalam@gmail.com">
+        <span class="contact-k mono">EMAIL</span>
+        <span class="contact-v">rejaulalam@gmail.com</span>
+      </a>
+      <a class="contact-row" href="mailto:reja@rtm-international.org">
+        <span class="contact-k mono">WORK</span>
+        <span class="contact-v">reja@rtm-international.org</span>
+      </a>
+      <a class="contact-row" href="tel:+8801977147947">
+        <span class="contact-k mono">PHONE</span>
+        <span class="contact-v">+880 1977 147 947</span>
+      </a>
+      <div class="contact-row">
+        <span class="contact-k mono">ADDRESS</span>
+        <span class="contact-v">133, Senpara Parbota, Infront of Al Helal Hospital, Mirpur-10, Dhaka-1216, Bangladesh</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="mono">© 2026 Kazi Rejaul Alam</span>
+    <span class="mono footer-status"><span class="nav-dot"></span> systems operational</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- terminal boot sequence ---------- */
+const bootLines = [
+  {t:'$ initializing rtm-ict-sys v1.0', cls:'pr'},
+  {t:'loading profile: Kazi Rejaul Alam', cls:''},
+  {t:'role: Deputy Director — ICT', cls:''},
+  {t:'sites online: 4/4', cls:'ok'},
+  {t:'uptime: 33+ years', cls:'ok'},
+  {t:'status: ready', cls:'ok'}
+];
+const termBody = document.getElementById('terminal-body');
+async function typeLine(line){
+  const div = document.createElement('div');
+  div.className = 'ln';
+  termBody.appendChild(div);
+  const span = document.createElement('span');
+  if(line.cls) span.className = line.cls;
+  div.appendChild(span);
+  for(let i=0;i<line.t.length;i++){
+    span.textContent += line.t[i];
+    await new Promise(r=>setTimeout(r, 14));
+  }
+}
+async function runBoot(){
+  for(const line of bootLines){
+    await typeLine(line);
+    await new Promise(r=>setTimeout(r, 90));
+  }
+  const cursor = document.createElement('span');
+  cursor.className = 'terminal-cursor';
+  termBody.appendChild(cursor);
+}
+setTimeout(runBoot, 350);
+
+/* ---------- network operations map ---------- */
+const nodes = [
+  {id:'hq', x:240, y:230, label:'RTM HQ', sub:'Head Office', r:34, hub:true},
+  {id:'cxb', x:110, y:90, label:"Cox's Bazar", sub:'Field Office', r:24},
+  {id:'syl', x:370, y:90, label:'Sylhet', sub:'RTMI-HRDC', r:24},
+  {id:'aktu', x:370, y:370, label:'RTM-AKTU', sub:'10-storey', r:24},
+  {id:'br', x:110, y:370, label:'Branch', sub:'Field site', r:24}
+];
+const links = [['hq','cxb'],['hq','syl'],['hq','aktu'],['hq','br']];
+
+const linesG = document.getElementById('netmap-lines');
+const pulsesG = document.getElementById('netmap-pulses');
+const nodesG = document.getElementById('netmap-nodes');
+const NS = 'http://www.w3.org/2000/svg';
+
+function el(tag, attrs){
+  const e = document.createElementNS(NS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+
+links.forEach(([a,b])=>{
+  const na = nodes.find(n=>n.id===a), nb = nodes.find(n=>n.id===b);
+  linesG.appendChild(el('line', {x1:na.x, y1:na.y, x2:nb.x, y2:nb.y}));
+});
+
+links.forEach(([a,b], i)=>{
+  const na = nodes.find(n=>n.id===a), nb = nodes.find(n=>n.id===b);
+  const circle = el('circle', {r:2.6, fill:'#FF7A29'});
+  pulsesG.appendChild(circle);
+  const dur = 2600 + i*300;
+  const delay = i*450;
+  function animatePulse(t0){
+    const now = performance.now();
+    let p = ((now - t0 - delay) % dur) / dur;
+    if(p < 0) p = 0;
+    const x = na.x + (nb.x - na.x) * p;
+    const y = na.y + (nb.y - na.y) * p;
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('opacity', p < 0.05 || p > 0.95 ? 0 : 0.9);
+    requestAnimationFrame(()=>animatePulse(t0));
+  }
+  requestAnimationFrame((t0)=>animatePulse(t0));
+});
+
+nodes.forEach(n=>{
+  const g = el('g', {});
+  if(n.hub){
+    const pulseRing = el('circle', {cx:n.x, cy:n.y, r:n.r, fill:'none', stroke:'#FF7A29', 'stroke-width':1, opacity:0.35});
+    pulseRing.innerHTML = '';
+    const anim1 = el('animate', {attributeName:'r', from:n.r, to:n.r+16, dur:'2.4s', repeatCount:'indefinite'});
+    const anim2 = el('animate', {attributeName:'opacity', from:0.35, to:0, dur:'2.4s', repeatCount:'indefinite'});
+    pulseRing.appendChild(anim1);
+    pulseRing.appendChild(anim2);
+    g.appendChild(pulseRing);
+  }
+  const circle = el('circle', {
+    cx:n.x, cy:n.y, r:n.r,
+    fill: n.hub ? '#1E140B' : '#12161D',
+    stroke: n.hub ? '#FF7A29' : '#2A3242',
+    'stroke-width': n.hub ? 1.6 : 1.2
+  });
+  g.appendChild(circle);
+  const label = el('text', {
+    x:n.x, y:n.y - (n.hub?4:3), 'text-anchor':'middle',
+    fill: n.hub ? '#FFA35C' : '#EDEFF2',
+    'font-family':'JetBrains Mono, monospace',
+    'font-size': n.hub ? 12 : 10.5,
+    'font-weight': 600
+  });
+  label.textContent = n.label;
+  g.appendChild(label);
+  const sub = el('text', {
+    x:n.x, y:n.y + (n.hub?12:11), 'text-anchor':'middle',
+    fill:'#5A6270', 'font-family':'JetBrains Mono, monospace', 'font-size':8.5
+  });
+  sub.textContent = n.sub;
+  g.appendChild(sub);
+  nodesG.appendChild(g);
+});
+
+/* ---------- scroll reveal ---------- */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+revealEls.forEach(e=>io.observe(e));
+
+/* ---------- stat count-up ---------- */
+const statEls = document.querySelectorAll('.stat-num[data-count]');
+const statIo = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1100;
+      el.textContent = '0';
+      const t0 = performance.now();
+      function step(now){
+        const p = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1-p, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      statIo.unobserve(el);
+    }
+  });
+}, {threshold:0.5});
+statEls.forEach(e=>statIo.observe(e));
+</script>
+
+</body>
+</html>
