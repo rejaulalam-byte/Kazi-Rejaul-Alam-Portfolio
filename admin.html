@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Kazi Rejaul Alam Portfolio</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D12; --bg-elev:#12161D; --bg-elev-2:#171C25;
+    --line:#232A35; --line-soft:#1A2029;
+    --text:#EDEFF2; --text-dim:#9098A8; --text-faint:#5A6270;
+    --accent:#FF7A29; --accent-soft:#FFA35C;
+    --accent-dim:rgba(255,122,41,0.12); --accent-line:rgba(255,122,41,0.35);
+    --ok:#3DDC84; --err:#FF5C5C; --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
+    line-height:1.55;min-height:100vh;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+  a{color:var(--accent-soft);}
+
+  /* ---------- gate / login screen ---------- */
+  #gate{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .gate-card{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:14px;
+    padding:40px;max-width:420px;width:100%;
+  }
+  .gate-card h1{font-family:'Space Grotesk',sans-serif;font-size:22px;margin-bottom:8px;}
+  .gate-card p{color:var(--text-dim);font-size:14px;margin-bottom:24px;}
+  label{display:block;font-size:12px;color:var(--accent-soft);letter-spacing:0.05em;margin-bottom:6px;margin-top:16px;}
+  input[type=password], input[type=text], textarea{
+    width:100%;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:8px;
+    color:var(--text);padding:11px 13px;font-size:14px;font-family:inherit;
+  }
+  input:focus, textarea:focus{outline:none;border-color:var(--accent-line);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 20px;border-radius:8px;font-size:14px;font-weight:500;
+    border:none;cursor:pointer;transition:all 0.15s;
+  }
+  .btn-primary{background:var(--accent);color:#180C04;}
+  .btn-primary:hover{background:var(--accent-soft);}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent-line);background:var(--accent-dim);}
+  .btn-danger{background:transparent;border:1px solid rgba(255,92,92,0.4);color:var(--err);}
+  .btn-danger:hover{background:rgba(255,92,92,0.1);}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .gate-actions{margin-top:24px;display:flex;gap:10px;}
+  .hint{font-size:12px;color:var(--text-faint);margin-top:8px;line-height:1.5;}
+  .error-msg{color:var(--err);font-size:13px;margin-top:10px;}
+
+  /* ---------- admin shell ---------- */
+  #admin{display:none;}
+  .admin-nav{
+    position:sticky;top:0;z-index:40;background:rgba(10,13,18,0.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .admin-nav-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;
+    display:flex;align-items:center;gap:8px;}
+  .status-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);}
+  .admin-nav-actions{display:flex;gap:10px;align-items:center;}
+  #save-status{font-size:12.5px;color:var(--text-faint);}
+
+  .admin-body{max-width:820px;margin:0 auto;padding:32px 24px 100px;}
+  .panel{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:12px;
+    padding:24px;margin-bottom:20px;
+  }
+  .panel-title{
+    font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;
+    margin-bottom:4px;display:flex;align-items:center;gap:8px;
+  }
+  .panel-sub{font-size:12.5px;color:var(--text-faint);margin-bottom:18px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:600px){.field-row{grid-template-columns:1fr;}}
+  textarea{resize:vertical;min-height:70px;}
+
+  .list-item{
+    background:var(--bg-elev-2);border:1px solid var(--line-soft);border-radius:9px;
+    padding:16px;margin-bottom:12px;position:relative;
+  }
+  .list-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .list-item-label{font-size:11px;color:var(--text-faint);letter-spacing:0.05em;}
+  .remove-btn{
+    background:none;border:none;color:var(--err);font-size:12px;cursor:pointer;
+    padding:4px 8px;border-radius:5px;
+  }
+  .remove-btn:hover{background:rgba(255,92,92,0.1);}
+  .add-btn{
+    width:100%;padding:11px;border:1px dashed var(--line);border-radius:8px;
+    background:transparent;color:var(--text-dim);font-size:13px;cursor:pointer;margin-top:6px;
+  }
+  .add-btn:hover{border-color:var(--accent-line);color:var(--accent-soft);}
+  .bullet-row{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;}
+  .bullet-row textarea{min-height:40px;flex:1;}
+  .bullet-row .remove-btn{flex:none;}
+
+  .image-panel-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .image-preview{width:90px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:var(--bg-elev-2);}
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:var(--bg-elev-2);border:1px solid var(--line);border-radius:10px;
+    padding:14px 22px;font-size:13.5px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    display:none;
+  }
+  .toast.show{display:block;}
+  .toast.ok{border-color:rgba(61,220,132,0.4);color:var(--ok);}
+  .toast.err{border-color:rgba(255,92,92,0.4);color:var(--err);}
+
+  .section-list-title{font-size:13px;color:var(--text-dim);margin:14px 0 8px;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN / GATE SCREEN
+     এখানে প্রথমে একটা সাধারণ পাসওয়ার্ড, তারপর GitHub টোকেন চাওয়া হয়।
+     ============================================================ -->
+<div id="gate">
+  <div class="gate-card">
+    <h1 class="display">🔒 Portfolio Admin</h1>
+    <p>এডিট করতে পাসওয়ার্ড দিন। প্রথমবার হলে GitHub token-ও দিতে হবে।</p>
+
+    <div id="password-step">
+      <label>PASSWORD</label>
+      <input type="password" id="password-input" placeholder="আপনার পাসওয়ার্ড">
+      <div class="gate-actions">
+        <button class="btn btn-primary" onclick="checkPassword()">প্রবেশ করুন</button>
+      </div>
+      <div class="error-msg" id="password-error"></div>
+    </div>
+
+    <div id="token-step" style="display:none;">
+      <label>GITHUB PERSONAL ACCESS TOKEN</label>
+      <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <div class="hint">
+        এই টোকেন শুধু আপনার ব্রাউজারে সেভ থাকবে (localStorage) — কোথাও পাঠানো হয় না।
+        টোকেন বানাতে: GitHub → Settings → Developer settings → Personal access tokens →
+        Fine-grained tokens → শুধু এই রিপোর জন্য "Contents: Read & write" পারমিশন দিন।
+      </div>
+      <label>GITHUB USERNAME</label>
+      <input type="text" id="owner-input" placeholder="rejaulalam-byte" value="rejaulalam-byte">
+      <label>REPOSITORY NAME</label>
+      <input type="text" id="repo-input" placeholder="Kazi-Rejaul-Alam-Portfolio" value="Kazi-Rejaul-Alam-Portfolio">
+      <div class="gate-actions">
+        <button class="btn btn-primary" onclick="saveToken()">সেভ করে এগিয়ে যান</button>
+      </div>
+      <div class="error-msg" id="token-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ADMIN PANEL (login হওয়ার পর দেখা যাবে)
+     ============================================================ -->
+<div id="admin">
+  <div class="admin-nav">
+    <div class="admin-nav-title"><span class="status-dot"></span> Portfolio Admin</div>
+    <div class="admin-nav-actions">
+      <span id="save-status"></span>
+      <a href="index.html" target="_blank" class="btn btn-ghost" style="text-decoration:none;">সাইট দেখুন ↗</a>
+      <button class="btn btn-primary" onclick="saveAll()">Save &amp; Publish</button>
+      <button class="btn btn-ghost" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- HERO -->
+    <div class="panel">
+      <div class="panel-title">🏠 Hero সেকশন</div>
+      <div class="panel-sub">নামের উপরের ট্যাগলাইন, নাম, আর নিচের বর্ণনা</div>
+      <label>উপরের ছোট লাইন (Eyebrow)</label>
+      <input type="text" id="f-hero-eyebrow">
+      <div class="field-row">
+        <div><label>নামের প্রথম লাইন</label><input type="text" id="f-hero-title1"></div>
+        <div><label>নামের দ্বিতীয় লাইন</label><input type="text" id="f-hero-title2"></div>
+      </div>
+      <label>নিচের বর্ণনা</label>
+      <textarea id="f-hero-sub"></textarea>
+      <div class="field-row">
+        <div><label>প্রথম বাটনের লেখা</label><input type="text" id="f-hero-cta1-text"></div>
+        <div><label>প্রথম বাটনের লিংক</label><input type="text" id="f-hero-cta1-href"></div>
+      </div>
+      <div class="field-row">
+        <div><label>দ্বিতীয় বাটনের লেখা</label><input type="text" id="f-hero-cta2-text"></div>
+        <div><label>দ্বিতীয় বাটনের লিংক (mailto:...)</label><input type="text" id="f-hero-cta2-href"></div>
+      </div>
+      <label>ছবির নিচের ব্যাজ লেখা</label>
+      <input type="text" id="f-hero-badge">
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="panel">
+      <div class="panel-title">🖼️ Hero ছবি</div>
+      <div class="panel-sub">নতুন ছবি বেছে নিলে সেভ করার সময় assets/hero.jpg রিপ্লেস হবে</div>
+      <div class="image-panel-row">
+        <img id="preview-hero-img" class="image-preview" src="assets/hero.jpg">
+        <input type="file" id="file-hero-img" accept="image/*">
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="panel">
+      <div class="panel-title">🔢 সংখ্যার সারি</div>
+      <div class="panel-sub">যেমন ৩৩+ বছর, ৫ টিম মেম্বার ইত্যাদি (৪টা বক্স)</div>
+      <div id="stats-list"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="panel">
+      <div class="panel-title">👤 About সেকশন</div>
+      <div class="panel-sub">প্রোফাইল অনুচ্ছেদ ও ব্যক্তিগত তথ্য</div>
+      <div class="section-list-title">অনুচ্ছেদগুলো</div>
+      <div id="about-paras-list"></div>
+      <button class="add-btn" onclick="addAboutPara()">+ নতুন অনুচ্ছেদ যোগ করুন</button>
+      <div class="field-row" style="margin-top:16px;">
+        <div><label>Location</label><input type="text" id="f-about-location"></div>
+        <div><label>Languages</label><input type="text" id="f-about-languages"></div>
+      </div>
+    </div>
+
+    <!-- ABOUT IMAGE -->
+    <div class="panel">
+      <div class="panel-title">🖼️ About ছবি</div>
+      <div class="panel-sub">নতুন ছবি বেছে নিলে সেভ করার সময় assets/profile.jpg রিপ্লেস হবে</div>
+      <div class="image-panel-row">
+        <img id="preview-about-img" class="image-preview" src="assets/profile.jpg">
+        <input type="file" id="file-about-img" accept="image/*">
+      </div>
+    </div>
+
+    <!-- EXPERTISE -->
+    <div class="panel">
+      <div class="panel-title">⭐ দক্ষতার তালিকা (Expertise)</div>
+      <div class="panel-sub">গ্রিডের প্রতিটা বক্স</div>
+      <div id="expertise-list"></div>
+      <button class="add-btn" onclick="addExpertise()">+ নতুন দক্ষতা যোগ করুন</button>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="panel">
+      <div class="panel-title">💼 কর্মঅভিজ্ঞতা (Experience)</div>
+      <div class="panel-sub">টাইমলাইনের প্রতিটা এন্ট্রি — নতুন চাকরি উপরে যোগ করলে সবচেয়ে সাম্প্রতিক হিসেবে দেখাবে</div>
+      <div id="experience-list"></div>
+      <button class="add-btn" onclick="addExperience()">+ নতুন অভিজ্ঞতা যোগ করুন</button>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="panel">
+      <div class="panel-title">🎓 শিক্ষা ও সার্টিফিকেশন</div>
+      <div class="section-list-title">ডিগ্রি / সার্টিফিকেট</div>
+      <div id="certs-list"></div>
+      <button class="add-btn" onclick="addCert()">+ নতুন সার্টিফিকেট যোগ করুন</button>
+      <div class="section-list-title" style="margin-top:20px;">টেকনিক্যাল ট্রেনিং</div>
+      <div id="training-list-admin"></div>
+      <button class="add-btn" onclick="addTraining()">+ নতুন ট্রেনিং যোগ করুন</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="panel">
+      <div class="panel-title">✉️ যোগাযোগের তথ্য</div>
+      <label>উপরের এক লাইন</label>
+      <input type="text" id="f-contact-intro">
+      <div class="field-row">
+        <div><label>Email</label><input type="text" id="f-contact-email"></div>
+        <div><label>Work email</label><input type="text" id="f-contact-work"></div>
+      </div>
+      <div class="field-row">
+        <div><label>ফোন (দেখানোর জন্য)</label><input type="text" id="f-contact-phone"></div>
+        <div><label>ফোন (tel: লিংকের জন্য, স্পেস ছাড়া)</label><input type="text" id="f-contact-phone-href"></div>
+      </div>
+      <label>ঠিকানা</label>
+      <textarea id="f-contact-address"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   ADMIN PANEL LOGIC
+   এই কোড GitHub REST API ব্যবহার করে সরাসরি content.json এবং
+   ছবি ফাইল কমিট করে। কোনো আলাদা সার্ভার লাগে না।
+   ============================================================ */
+
+// ---- Configuration ----
+// এই পাসওয়ার্ডটা বদলাতে চাইলে নিচের লাইনটা এডিট করুন।
+// মনে রাখবেন: এটা একটা সাধারণ বাধা মাত্র, প্রকৃত নিরাপত্তা GitHub token থেকে আসে।
+const ADMIN_PASSWORD = "reja2026";
+
+let CONTENT = null;
+let GH_TOKEN = null, GH_OWNER = null, GH_REPO = null;
+let heroFileB64 = null, aboutFileB64 = null; // pending new image uploads
+
+function toast(msg, kind){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (kind||'');
+  setTimeout(()=>{ t.className = 'toast'; }, 3500);
+}
+
+// ---------- Gate: password then token ----------
+function checkPassword(){
+  const val = document.getElementById('password-input').value;
+  if(val !== ADMIN_PASSWORD){
+    document.getElementById('password-error').textContent = 'পাসওয়ার্ড ভুল হয়েছে।';
+    return;
+  }
+  document.getElementById('password-error').textContent = '';
+  const savedToken = localStorage.getItem('gh_token');
+  const savedOwner = localStorage.getItem('gh_owner');
+  const savedRepo = localStorage.getItem('gh_repo');
+  if(savedToken && savedOwner && savedRepo){
+    GH_TOKEN = savedToken; GH_OWNER = savedOwner; GH_REPO = savedRepo;
+    enterAdmin();
+  } else {
+    document.getElementById('password-step').style.display = 'none';
+    document.getElementById('token-step').style.display = 'block';
+  }
+}
+
+function saveToken(){
+  const token = document.getElementById('token-input').value.trim();
+  const owner = document.getElementById('owner-input').value.trim();
+  const repo = document.getElementById('repo-input').value.trim();
+  if(!token || !owner || !repo){
+    document.getElementById('token-error').textContent = 'সব ঘর পূরণ করুন।';
+    return;
+  }
+  localStorage.setItem('gh_token', token);
+  localStorage.setItem('gh_owner', owner);
+  localStorage.setItem('gh_repo', repo);
+  GH_TOKEN = token; GH_OWNER = owner; GH_REPO = repo;
+  enterAdmin();
+}
+
+function logout(){
+  document.getElementById('admin').style.display = 'none';
+  document.getElementById('gate').style.display = 'flex';
+  document.getElementById('password-step').style.display = 'block';
+  document.getElementById('token-step').style.display = 'none';
+  document.getElementById('password-input').value = '';
+}
+
+async function enterAdmin(){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('admin').style.display = 'block';
+  await loadContentIntoForm();
+}
+
+// ---------- GitHub API helpers ----------
+async function ghGetFile(path){
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${GH_TOKEN}` } });
+  if(!res.ok) throw new Error(`GitHub থেকে ${path} পড়া যায়নি (${res.status})`);
+  return res.json(); // { content (base64), sha, ... }
+}
+
+async function ghPutFile(path, base64Content, message, sha){
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const body = { message, content: base64Content };
+  if(sha) body.sha = sha;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${GH_TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(`${path} সেভ করা যায়নি: ${err.message || res.status}`);
+  }
+  return res.json();
+}
+
+function utf8ToBase64(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+// ---------- Load content.json into the form ----------
+async function loadContentIntoForm(){
+  try{
+    const file = await ghGetFile('content.json');
+    const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/\n/g,''))));
+    CONTENT = JSON.parse(jsonStr);
+  } catch(e){
+    toast('content.json লোড করতে সমস্যা হয়েছে: ' + e.message, 'err');
+    return;
+  }
+
+  // hero
+  document.getElementById('f-hero-eyebrow').value = CONTENT.hero.eyebrow;
+  document.getElementById('f-hero-title1').value = CONTENT.hero.titleLine1;
+  document.getElementById('f-hero-title2').value = CONTENT.hero.titleLine2;
+  document.getElementById('f-hero-sub').value = CONTENT.hero.subtitle;
+  document.getElementById('f-hero-cta1-text').value = CONTENT.hero.ctaPrimaryText;
+  document.getElementById('f-hero-cta1-href').value = CONTENT.hero.ctaPrimaryHref;
+  document.getElementById('f-hero-cta2-text').value = CONTENT.hero.ctaGhostText;
+  document.getElementById('f-hero-cta2-href').value = CONTENT.hero.ctaGhostHref;
+  document.getElementById('f-hero-badge').value = CONTENT.hero.photoBadge;
+
+  // stats
+  renderStatsList();
+
+  // about
+  renderAboutParas();
+  document.getElementById('f-about-location').value = CONTENT.about.location;
+  document.getElementById('f-about-languages').value = CONTENT.about.languages;
+
+  // expertise
+  renderExpertiseList();
+
+  // experience
+  renderExperienceList();
+
+  // education
+  renderCertsList();
+  renderTrainingList();
+
+  // contact
+  document.getElementById('f-contact-intro').value = CONTENT.contact.intro;
+  document.getElementById('f-contact-email').value = CONTENT.contact.email;
+  document.getElementById('f-contact-work').value = CONTENT.contact.work;
+  document.getElementById('f-contact-phone').value = CONTENT.contact.phone;
+  document.getElementById('f-contact-phone-href').value = CONTENT.contact.phoneHref;
+  document.getElementById('f-contact-address').value = CONTENT.contact.address;
+
+  // image previews (cache-bust so latest committed image shows)
+  document.getElementById('preview-hero-img').src = 'assets/hero.jpg?t=' + Date.now();
+  document.getElementById('preview-about-img').src = 'assets/profile.jpg?t=' + Date.now();
+}
+
+// ---------- Dynamic list renderers ----------
+function renderStatsList(){
+  const wrap = document.getElementById('stats-list');
+  wrap.innerHTML = '';
+  CONTENT.stats.forEach((s, i)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    const isCount = s.count !== undefined;
+    div.innerHTML = `
+      <div class="list-item-top"><span class="list-item-label">BOX ${i+1}</span></div>
+      <div class="field-row">
+        <div><label>${isCount ? 'সংখ্যা' : 'টেক্সট (যেমন Multi-site)'}</label>
+          <input type="text" value="${isCount ? s.count : s.text}" onchange="updateStat(${i},'value',this.value)"></div>
+        <div><label>Suffix (যেমন +)</label>
+          <input type="text" value="${s.suffix||''}" onchange="updateStat(${i},'suffix',this.value)" ${isCount?'':'disabled'}></div>
+      </div>
+      <label>নিচের লেবেল</label>
+      <input type="text" value="${s.label}" onchange="updateStat(${i},'label',this.value)">
+    `;
+    wrap.appendChild(div);
+  });
+}
+function updateStat(i, field, val){
+  const s = CONTENT.stats[i];
+  if(field === 'value'){
+    if(s.count !== undefined){ s.count = isNaN(Number(val)) ? val : Number(val); }
+    else { s.text = val; }
+  } else if(field === 'suffix'){ s.suffix = val; }
+  else if(field === 'label'){ s.label = val; }
+}
+
+function renderAboutParas(){
+  const wrap = document.getElementById('about-paras-list');
+  wrap.innerHTML = '';
+  CONTENT.about.paragraphs.forEach((p, i)=>{
+    const div = document.createElement('div');
+    div.className = 'bullet-row';
+    div.innerHTML = `
+      <textarea onchange="CONTENT.about.paragraphs[${i}] = this.value">${p}</textarea>
+      <button class="remove-btn" onclick="removeAboutPara(${i})">✕</button>`;
+    wrap.appendChild(div);
+  });
+}
+function addAboutPara(){ CONTENT.about.paragraphs.push('নতুন অনুচ্ছেদ...'); renderAboutParas(); }
+function removeAboutPara(i){ CONTENT.about.paragraphs.splice(i,1); renderAboutParas(); }
+
+function renderExpertiseList(){
+  const wrap = document.getElementById('expertise-list');
+  wrap.innerHTML = '';
+  CONTENT.expertise.forEach((e, i)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <div class="list-item-top"><span class="list-item-label">EXPERTISE ${i+1}</span>
+        <button class="remove-btn" onclick="removeExpertise(${i})">✕ Remove</button></div>
+      <label>শিরোনাম</label>
+      <input type="text" value="${escapeAttr(e.title)}" onchange="CONTENT.expertise[${i}].title = this.value">
+      <label>বর্ণনা</label>
+      <textarea onchange="CONTENT.expertise[${i}].desc = this.value">${e.desc}</textarea>`;
+    wrap.appendChild(div);
+  });
+}
+function addExpertise(){ CONTENT.expertise.push({title:'নতুন দক্ষতা', desc:'বর্ণনা লিখুন...'}); renderExpertiseList(); }
+function removeExpertise(i){ CONTENT.expertise.splice(i,1); renderExpertiseList(); }
+
+function renderExperienceList(){
+  const wrap = document.getElementById('experience-list');
+  wrap.innerHTML = '';
+  CONTENT.experience.forEach((job, i)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    const bulletsHtml = job.bullets.map((b, bi)=>`
+      <div class="bullet-row">
+        <textarea onchange="CONTENT.experience[${i}].bullets[${bi}] = this.value">${b}</textarea>
+        <button class="remove-btn" onclick="removeExpBullet(${i},${bi})">✕</button>
+      </div>`).join('');
+    div.innerHTML = `
+      <div class="list-item-top"><span class="list-item-label">EXPERIENCE ${i+1}</span>
+        <button class="remove-btn" onclick="removeExperience(${i})">✕ Remove entry</button></div>
+      <div class="field-row">
+        <div><label>তারিখ (যেমন 2025 — Present)</label>
+          <input type="text" value="${escapeAttr(job.date)}" onchange="CONTENT.experience[${i}].date = this.value"></div>
+        <div><label>পদবী</label>
+          <input type="text" value="${escapeAttr(job.title)}" onchange="CONTENT.experience[${i}].title = this.value"></div>
+      </div>
+      <label>প্রতিষ্ঠান</label>
+      <input type="text" value="${escapeAttr(job.org||'')}" onchange="CONTENT.experience[${i}].org = this.value">
+      <div class="section-list-title">কাজের বিবরণ</div>
+      ${bulletsHtml}
+      <button class="add-btn" onclick="addExpBullet(${i})">+ লাইন যোগ করুন</button>
+    `;
+    wrap.appendChild(div);
+  });
+}
+function addExperience(){
+  CONTENT.experience.unshift({date:'YYYY — Present', title:'নতুন পদবী', org:'প্রতিষ্ঠানের নাম', bullets:['বিবরণ লিখুন...']});
+  renderExperienceList();
+}
+function removeExperience(i){ CONTENT.experience.splice(i,1); renderExperienceList(); }
+function addExpBullet(i){ CONTENT.experience[i].bullets.push('নতুন লাইন...'); renderExperienceList(); }
+function removeExpBullet(i,bi){ CONTENT.experience[i].bullets.splice(bi,1); renderExperienceList(); }
+
+function renderCertsList(){
+  const wrap = document.getElementById('certs-list');
+  wrap.innerHTML = '';
+  CONTENT.education.certs.forEach((c, i)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <div class="list-item-top"><span class="list-item-label">CERT ${i+1}</span>
+        <button class="remove-btn" onclick="removeCert(${i})">✕ Remove</button></div>
+      <div class="field-row">
+        <div><label>কোড (যেমন CCNA)</label>
+          <input type="text" value="${escapeAttr(c.code)}" onchange="CONTENT.education.certs[${i}].code = this.value"></div>
+        <div><label>প্রতিষ্ঠান</label>
+          <input type="text" value="${escapeAttr(c.name)}" onchange="CONTENT.education.certs[${i}].name = this.value"></div>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addCert(){ CONTENT.education.certs.push({code:'XXX', name:'প্রতিষ্ঠানের নাম'}); renderCertsList(); }
+function removeCert(i){ CONTENT.education.certs.splice(i,1); renderCertsList(); }
+
+function renderTrainingList(){
+  const wrap = document.getElementById('training-list-admin');
+  wrap.innerHTML = '';
+  CONTENT.education.training.forEach((t, i)=>{
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <div class="list-item-top"><span class="list-item-label">TRAINING ${i+1}</span>
+        <button class="remove-btn" onclick="removeTraining(${i})">✕ Remove</button></div>
+      <div class="field-row">
+        <div><label>মেয়াদ (যেমন 6 mo)</label>
+          <input type="text" value="${escapeAttr(t.tag)}" onchange="CONTENT.education.training[${i}].tag = this.value"></div>
+        <div><label>বিবরণ</label>
+          <input type="text" value="${escapeAttr(t.text)}" onchange="CONTENT.education.training[${i}].text = this.value"></div>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addTraining(){ CONTENT.education.training.push({tag:'—', text:'ট্রেনিং এর নাম'}); renderTrainingList(); }
+function removeTraining(i){ CONTENT.education.training.splice(i,1); renderTrainingList(); }
+
+function escapeAttr(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+// ---------- Image file selection (converted to base64, uploaded on Save) ----------
+document.getElementById('file-hero-img').addEventListener('change', function(e){
+  const f = e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    heroFileB64 = reader.result.split(',')[1];
+    document.getElementById('preview-hero-img').src = reader.result;
+  };
+  reader.readAsDataURL(f);
+});
+document.getElementById('file-about-img').addEventListener('change', function(e){
+  const f = e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    aboutFileB64 = reader.result.split(',')[1];
+    document.getElementById('preview-about-img').src = reader.result;
+  };
+  reader.readAsDataURL(f);
+});
+
+// ---------- Collect simple fields back into CONTENT before saving ----------
+function collectFormIntoContent(){
+  CONTENT.hero.eyebrow = document.getElementById('f-hero-eyebrow').value;
+  CONTENT.hero.titleLine1 = document.getElementById('f-hero-title1').value;
+  CONTENT.hero.titleLine2 = document.getElementById('f-hero-title2').value;
+  CONTENT.hero.subtitle = document.getElementById('f-hero-sub').value;
+  CONTENT.hero.ctaPrimaryText = document.getElementById('f-hero-cta1-text').value;
+  CONTENT.hero.ctaPrimaryHref = document.getElementById('f-hero-cta1-href').value;
+  CONTENT.hero.ctaGhostText = document.getElementById('f-hero-cta2-text').value;
+  CONTENT.hero.ctaGhostHref = document.getElementById('f-hero-cta2-href').value;
+  CONTENT.hero.photoBadge = document.getElementById('f-hero-badge').value;
+
+  CONTENT.about.location = document.getElementById('f-about-location').value;
+  CONTENT.about.languages = document.getElementById('f-about-languages').value;
+
+  CONTENT.contact.intro = document.getElementById('f-contact-intro').value;
+  CONTENT.contact.email = document.getElementById('f-contact-email').value;
+  CONTENT.contact.work = document.getElementById('f-contact-work').value;
+  CONTENT.contact.phone = document.getElementById('f-contact-phone').value;
+  CONTENT.contact.phoneHref = document.getElementById('f-contact-phone-href').value;
+  CONTENT.contact.address = document.getElementById('f-contact-address').value;
+}
+
+// ---------- Save & publish ----------
+async function saveAll(){
+  const statusEl = document.getElementById('save-status');
+  const saveBtn = document.querySelector('.admin-nav-actions .btn-primary');
+  saveBtn.disabled = true;
+  statusEl.textContent = 'সেভ হচ্ছে...';
+  try{
+    collectFormIntoContent();
+
+    // 1) content.json
+    const currentFile = await ghGetFile('content.json');
+    const newJson = JSON.stringify(CONTENT, null, 2);
+    await ghPutFile('content.json', utf8ToBase64(newJson), 'Update content via admin panel', currentFile.sha);
+
+    // 2) hero image, if a new one was chosen
+    if(heroFileB64){
+      let sha = null;
+      try{ const f = await ghGetFile('assets/hero.jpg'); sha = f.sha; }catch(e){}
+      await ghPutFile('assets/hero.jpg', heroFileB64, 'Update hero photo via admin panel', sha);
+      heroFileB64 = null;
+    }
+
+    // 3) about image, if a new one was chosen
+    if(aboutFileB64){
+      let sha = null;
+      try{ const f = await ghGetFile('assets/profile.jpg'); sha = f.sha; }catch(e){}
+      await ghPutFile('assets/profile.jpg', aboutFileB64, 'Update about photo via admin panel', sha);
+      aboutFileB64 = null;
+    }
+
+    statusEl.textContent = 'সেভ হয়েছে ✓ (লাইভ হতে ~১ মিনিট লাগবে)';
+    toast('সফলভাবে GitHub-এ পাবলিশ হয়েছে!', 'ok');
+  } catch(e){
+    statusEl.textContent = '';
+    toast('সমস্যা হয়েছে: ' + e.message, 'err');
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+// Enter key submits password/token fields
+document.getElementById('password-input').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPassword(); });
+document.getElementById('token-input').addEventListener('keydown', e=>{ if(e.key==='Enter') saveToken(); });
+</script>
+</body>
+</html>

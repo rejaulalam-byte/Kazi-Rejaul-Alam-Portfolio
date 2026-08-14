@@ -1,0 +1,139 @@
+{
+  "site": {
+    "title": "Kazi Rejaul Alam — Deputy Director, ICT",
+    "description": "Portfolio of Kazi Rejaul Alam, Deputy Director — ICT at RTM International. 33+ years in network infrastructure, systems administration and digital security.",
+    "brandName": "KAZI REJAUL ALAM",
+    "footerName": "© 2026 Kazi Rejaul Alam"
+  },
+  "hero": {
+    "eyebrow": "IT PROFESSIONAL · TECHNOLOGY MENTOR · WEB DEVELOPMENT",
+    "titleLine1": "Kazi Rejaul",
+    "titleLine2": "Alam",
+    "subtitle": "With 30+ years of experience in IT, I turn complex technology into practical, easy-to-understand learning — helping people build skills in web development, networking, systems, and modern digital tools.",
+    "ctaPrimaryText": "View experience",
+    "ctaPrimaryHref": "#experience",
+    "ctaGhostText": "Email me",
+    "ctaGhostHref": "mailto:rejaulalam@gmail.com",
+    "photoBadge": "DEPUTY DIRECTOR — ICT · RTM INTERNATIONAL"
+  },
+  "stats": [
+    { "count": 33, "suffix": "+", "label": "Years of experience" },
+    { "count": 5, "suffix": "", "label": "IT team members" },
+    { "count": 500, "suffix": "+", "label": "Devices supported" },
+    { "text": "Multi-site", "label": "ICT operations" }
+  ],
+  "about": {
+    "paragraphs": [
+      "Senior ICT professional with more than 33 years of experience in office and program management, MIS, ICT operations, network infrastructure, security, and computer/network troubleshooting.",
+      "Currently serving as Deputy Director — ICT at RTM International, with responsibility for the organization's overall network and ICT systems across the head office, branch/field offices, RTMI-HRDC and RTM Al-Kabir Technical University (RTM-AKTU).",
+      "Experienced in ICT planning, communication systems, digital security, team supervision, technical support, and technology-related administrative planning."
+    ],
+    "location": "Dhaka, Bangladesh",
+    "languages": "Bangla (native), English (good)"
+  },
+  "expertise": [
+    { "title": "IT / ICT management", "desc": "Planning and running ICT operations across multi-site organizations." },
+    { "title": "Network design & administration", "desc": "LAN architecture, servers, and infrastructure across head office and field sites." },
+    { "title": "Hardware & software troubleshooting", "desc": "Keeping 500+ desktops, laptops and peripherals running reliably." },
+    { "title": "Server & user account administration", "desc": "Provisioning, maintaining and securing user and server accounts." },
+    { "title": "MIS & management reporting", "desc": "Building and maintaining management information systems and reports." },
+    { "title": "Email & internet services", "desc": "Organization-wide email systems, connectivity and communication tools." },
+    { "title": "IT procurement & technical support", "desc": "Sourcing network hardware and supporting staff across every site." },
+    { "title": "Digital security / CCTV systems", "desc": "Overseeing surveillance and digital-security infrastructure." },
+    { "title": "WordPress web design / UI-UX", "desc": "Designing and shipping websites, including AI-assisted workflows." }
+  ],
+  "experience": [
+    {
+      "date": "2025 — Present",
+      "title": "Deputy Director — ICT",
+      "org": "Research, Training and Management International (RTM International), RTM Complex, Dhaka",
+      "bullets": [
+        "Fully responsible for RTM International's total network system.",
+        "Supervises and coordinates five IT team members.",
+        "Oversees ICT services for the head office, Cox's Bazar field office, Sylhet Branch / RTMI-HRDC and RTM Al-Kabir Technical University (RTM-AKTU), both 10-storey buildings.",
+        "Supports an environment of more than 500 desktop and laptop computers and related equipment.",
+        "Plans the organization's total communication system, including email and telecommunications.",
+        "Oversees digital security systems, including CCTV and related technology."
+      ]
+    },
+    {
+      "date": "2017 — 2024",
+      "title": "IT Officer",
+      "org": "RTM International, RTM Complex, Dhaka",
+      "bullets": [
+        "Responsible for LAN design and maintenance at RTM Head Quarter, supporting 250+ computers across divisions.",
+        "Provided hardware and software troubleshooting and solutions.",
+        "Maintained network servers, user accounts and network tools.",
+        "Supported procurement of network-related accessories."
+      ]
+    },
+    {
+      "date": "2014 — 2017",
+      "title": "MIS Officer",
+      "org": "RTM International — Long-Acting Reversible Contraceptive and Permanent Method Services Project, with EngenderHealth Bangladesh, funded by USAID",
+      "bullets": [
+        "Coordinated with seven Mobile Service Delivery Care Teams for project MIS across divisions.",
+        "Monitored operations and collected service data from surgeons and paramedics.",
+        "Prepared monthly and quarterly reports for EngenderHealth."
+      ]
+    },
+    {
+      "date": "2002 — 2014",
+      "title": "IT Officer",
+      "org": "RTM International / JSI Bangladesh, Dhaka",
+      "bullets": [
+        "Responsible for LAN design and maintenance for a 5-storey headquarters and district project computers.",
+        "Implemented MIS and supported development of program-related software.",
+        "Prepared and compiled MIS performance reports, and monitored nationwide surveys."
+      ]
+    },
+    {
+      "date": "2000 — 2002",
+      "title": "System Associate",
+      "org": "Urban Family Health Partnership (UFHP) / JSI, Dhaka",
+      "bullets": [
+        "Designed, operated and maintained LAN at UFHP headquarters.",
+        "Specified hardware, software and communication standards for NGO systems.",
+        "Maintained project NGO MIS monthly reports."
+      ]
+    },
+    {
+      "date": "1990 — 2000",
+      "title": "Earlier roles",
+      "org": "",
+      "bullets": [
+        "<strong>Personal Officer &amp; Computer in Charge</strong>, Creative Engineers Ltd. (1997–2000) — office computers, LAN systems and graphic design work.",
+        "<strong>Computer Operator</strong>, Development Planners &amp; Consultants (1993–1997) — reports and graphical work for World Bank–funded education projects.",
+        "<strong>Photographic Technical Trainer</strong>, INFOSYS Group (1995) — trained photographers under the Election Commission's Voter I.D. Card Project.",
+        "<strong>Data Entry / Computer Operator</strong>, BRAC &amp; BCAS (1990–1991) — data entry, checking and official documentation."
+      ],
+      "earlier": true
+    }
+  ],
+  "education": {
+    "certs": [
+      { "code": "B.A.", "name": "University of Dhaka" },
+      { "code": "MCP", "name": "Microsoft Corporation" },
+      { "code": "CCNA", "name": "Cisco Systems, Inc." },
+      { "code": "RHCSE", "name": "Red Hat, Inc." },
+      { "code": "RHCSA", "name": "Red Hat, Inc." }
+    ],
+    "training": [
+      { "tag": "6 mo", "text": "Microsoft Certified Solutions Associate (MCSA) 2012 Server — CLS Training Institute, Dhaka" },
+      { "tag": "7 mo", "text": "Cisco Certified Network Associate (CCNA) — Linux Pathshala, Mohammadpur, Dhaka" },
+      { "tag": "6 mo", "text": "Red Hat Linux (DNS, Gateway, FTP, HTTP, NFS, Samba, server setup) — Linux Pathshala, Dhaka" },
+      { "tag": "1 yr", "text": "Computer Networking / MCSE — IBM-ACE Advanced Career Education, Dhaka" },
+      { "tag": "2 mo", "text": "Computer Network System (NT Environment) — hitech professionals, Dhaka (1999)" },
+      { "tag": "4 mo", "text": "Computer Hardware — Computer & Electronic, Dhaka (1998)" },
+      { "tag": "—", "text": "Apple Computer training — Bangla Academy Computer Training Centre (1992)" }
+    ]
+  },
+  "contact": {
+    "intro": "Open to conversations on ICT operations, network infrastructure and digital security. Reach out directly.",
+    "email": "rejaulalam@gmail.com",
+    "work": "reja@rtm-international.org",
+    "phone": "+880 1977 147 947",
+    "phoneHref": "+8801977147947",
+    "address": "133, Senpara Parbota, Infront of Al Helal Hospital, Mirpur-10, Dhaka-1216, Bangladesh"
+  }
+}
